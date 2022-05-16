@@ -12,8 +12,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="/" style="color:#f69d3c">Home</a></li>
                 {% if current_user.is_authenticated %}
-                <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a></li>
-                <li><a href="{{url_for('main.new_pitch')}}">Pitch</a></li>
+                <li><a href="{{url_for('main.new_post')}}">Blog</a></li>
                   <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
                   {% else %}
                   <li><a href="{{url_for('auth.login')}}">Sign in</a></li>

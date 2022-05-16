@@ -17,7 +17,7 @@ def index():
     return render_template('index.html',all_quotes=all_quotes,blogs = blogs)
 
 @main.route('/post')
-def post():
+def new_post():
     '''
       function for displaying the blog post
     '''
@@ -31,7 +31,7 @@ def post():
         new_blog_dict.save_blog()
         return redirect(url_for('main.index'))
         
-    return render_template('post.html')
+    return render_template('post.html', form = form)
 
 @main.route('/add')
 def add():
