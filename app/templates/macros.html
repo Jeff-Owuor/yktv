@@ -1,0 +1,11 @@
+{% macro displayQuoteList(quote_list) %}
+
+    {% for quote in quote_list %}
+    <p>{{quote.quote}}</p>
+    <h4>{{ quote.author }}</h4>
+    <a href="{{quote.permalink}}" style="color:black"> 
+    </a>
+    
+    {% endfor %}
+
+{% endmacro %}

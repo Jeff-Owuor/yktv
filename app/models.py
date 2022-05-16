@@ -102,6 +102,18 @@ class Votes(db.Model):
 
     def __repr__(self):
         return f'{self.vote}:{self.user_id}:{self.blog_id}'    
+    
+    
+class Quote_source:
+    '''
+    News class to define New Objects
+    '''
+
+    def __init__(self,author,quote,link):
+        self.author = author
+        self.quote = quote
+        self.link = link
+        
    
 
   
