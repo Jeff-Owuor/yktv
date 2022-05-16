@@ -24,10 +24,10 @@
 
 
 {% macro displaySpecificBlog(specific_blog_list) %} 
-{% for comment in specific_pitch_list %}
-<div style="display:flex;justify-content:space-between;border-top:2px solid black;border-right:2px solid black;border-left:2px solid black; margin:8px;">
+{% for comment in specific_blog_list %}
+<div>
     <p style="margin:5px; font-size:20px;font-family:Arial, Helvetica, sans-serif;">{{comment.comment}} </p>
     <p style="margin:5px;font-size:20px;">{{comment.time_posted.strftime('%Y/%m/%d || %r') }}</p>
 </div>
 {% endfor %} 
-{% endmacro %}   
+{% endmacro %}  
