@@ -91,3 +91,41 @@ def new_comment(id):
         new_comment.save_comment()
         return redirect(url_for('.add_pitch', id=blog.id ))
     return render_template('comments.html',form=form)
+
+@main.route('/a_pitch/<int:id>', methods=['GET', 'POST'])
+@login_required
+def add_pitch(id):
+    blogs = Blogs.query.get(id)
+    
+    if blogs is None:
+        abort(404)
+    
+    comment = Comment.get_comments(id)
+    count_likes = Votes.query.filter_by(blog_id=id, vote=1).all()
+    count_dislikes = Votes.query.filter_by(blog_id=id, vote=2).all()
+    return render_template('add_pitch.html', blogs = blogs, comment = comment, count_likes=len(count_likes), count_dislikes=len(count_dislikes))
+
+@main.route('/blog/upvote/<int:id>&<int:vote_type>')
+@login_required
+def upvote(id,vote_type):
+    votes = Votes.query.filter_by(user_id=current_user.id).all()
+    print(f'The new vote is {votes}')
+    to_str=f'{vote_type}:{current_user.id}:{id}'
+    print(f'The current vote is {to_str}')
+
+    if not votes:
+        new_vote = Votes(vote=vote_type, user_id=current_user.id, blog_id=id)
+        new_vote.save_vote()
+        print('YOU HAVE  NEW VOTE')
+
+    for vote in votes:
+        if f'{vote}' == to_str:
+            print('YOU CANNOT VOTE MORE THAN ONCE')
+            break
+        else:   
+            new_vote = Votes(vote=vote_type, user_id=current_user.id, blog_id=id)
+            new_vote.save_vote()
+            print('YOU HAVE VOTED')
+            break
+    return redirect(url_for('.add_pitch', id=id))   
+    
