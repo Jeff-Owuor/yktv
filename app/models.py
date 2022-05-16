@@ -46,17 +46,16 @@ class Blogs(db.Model):
     author = db.Column(db.String(255))
     blog = db.Column(db.Text())
     title = db.Column(db.String(20))
-    subtitle = db.Column(db.String(20))
     vote = db.relationship('Votes',backref='pitches',lazy='dynamic')
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     comment = db.relationship('Comment',backref = 'blogs',lazy="dynamic") 
     
-    def save_pitch(self):
+    def save_blog(self):
         db.session.add(self)
         db.session.commit()
 
     @classmethod
-    def get_pitches(cls,id):
+    def get_blogs(cls,id):
         Blogs = Blogs.query.filter_by(user_id=id).all()
         return Blogs  
     
