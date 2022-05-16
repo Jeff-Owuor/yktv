@@ -12,30 +12,14 @@ def get_random_quote():
     '''
       Function that gets the random quotes from the random qoute api
     '''
-    
+    quote_object = None
     with urllib.request.urlopen(base_url) as url:
         get_quotes_data = url.read()
         get_quote = json.loads(get_quotes_data)
-        quote_results_list = get_quote;
-        quote_results = process_results(quote_results_list)
         
+        author = get_quote.get('author')
+        quote = get_quote.get('quote')
+        quote_object = Quote_source(author,quote)
         
-    return quote_results
+    return quote_object
     
-    
-def process_results(quote_list):
-    '''
-      function that process our results
-    '''
-    quote_result = []
-    
-    for quote_item in quote_list:
-        author = quote_item.get('author')
-        quote = quote_item.get('quote')
-        link = quote_item.get('permalink')
-        quote_object = Quote_source(author,quote,link)
-        
-        quote_result.append(quote_object)
-        
-    return quote_result
-        

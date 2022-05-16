@@ -43,8 +43,10 @@ class Blogs(db.Model):
     
     id = db.Column(db.Integer,primary_key = True)
     posted = db.Column(db.DateTime,default=datetime.utcnow)
-    category = db.Column(db.String(255))
-    blog = db.Column(db.String())
+    author = db.Column(db.String(255))
+    blog = db.Column(db.Text())
+    title = db.Column(db.String(20))
+    subtitle = db.Column(db.String(20))
     vote = db.relationship('Votes',backref='pitches',lazy='dynamic')
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     comment = db.relationship('Comment',backref = 'blogs',lazy="dynamic") 
@@ -109,10 +111,10 @@ class Quote_source:
     News class to define New Objects
     '''
 
-    def __init__(self,author,quote,link):
+    def __init__(self,author,quote):
         self.author = author
         self.quote = quote
-        self.link = link
+
         
    
 

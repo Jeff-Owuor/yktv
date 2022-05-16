@@ -8,7 +8,7 @@ class Config:
     
     '''
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    RANDOM_QUOTE_URL = "http://quotes.stormconsultancy.co.uk/{}.json"
+    RANDOM_QUOTE_URL = "http://quotes.stormconsultancy.co.uk/random.json"
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://paulineapondi:1989@localhost/blog'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOADED_PHOTOS_DEST ='app/static/photos'
