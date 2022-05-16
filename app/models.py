@@ -52,6 +52,10 @@ class Blogs(db.Model):
     def save_blog(self):
         db.session.add(self)
         db.session.commit()
+        
+    def delete_blog(self):
+        db.session.delete(self)
+        db.session.commit()
 
     @classmethod
     def get_blogs(cls,id):
@@ -72,6 +76,10 @@ class Comment(db.Model):
     
     def save_comment(self):
         db.session.add(self)
+        db.session.commit()
+        
+    def delete_comment(self):
+        db.session.delete(self)
         db.session.commit()
 
     @classmethod

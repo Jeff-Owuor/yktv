@@ -3,7 +3,7 @@ from flask import render_template,request,redirect,url_for,abort
 from . import main
 from .. import db,photos
 from app.request import get_random_quote
-from .forms import BlogForm,UpdateProfile
+from .forms import BlogForm,UpdateProfile,CommentsForm
 from ..models import User,Blogs,Votes,Comment
 from flask_login import login_required, current_user
 
@@ -76,7 +76,18 @@ def new_post():
         
     return render_template('post.html', form = form)
 
-@main.route('/add')
-def add():
+@main.route('/comments/<int:id>', methods=['GET','POST'])
+@login_required
+def new_comment(id):
+    blog = Blogs.query.filter_by(id=id).first()
+    form = CommentsForm()
+    if blog is None:
+        abort(404)
+        
     
-    return render_template('add.html')
+    if form.validate_on_submit():
+        comments = form.comment_detail.data
+        new_comment = Comment( comment=comments, user_id = current_user.id, blog_id = blog.id )
+        new_comment.save_comment()
+        return redirect(url_for('.add_pitch', id=blog.id ))
+    return render_template('comments.html',form=form)
