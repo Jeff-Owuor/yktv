@@ -68,10 +68,9 @@ def new_post():
     form = BlogForm()
     if form.validate_on_submit():
         blog = form.blog.data
-        author = form.author.data
-        title = form.tile.data
+        title = form.title.data
         user_id = current_user._get_current_object().id
-        new_blog_dict = Blogs(blog = blog,user_id=user_id,author = author, title = title)
+        new_blog_dict = Blogs(blog = blog,user_id=user_id, title = title)
         new_blog_dict.save_blog()
         return redirect(url_for('main.index'))
         

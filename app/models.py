@@ -43,7 +43,6 @@ class Blogs(db.Model):
     
     id = db.Column(db.Integer,primary_key = True)
     posted = db.Column(db.DateTime,default=datetime.utcnow)
-    author = db.Column(db.String(255))
     blog = db.Column(db.Text())
     title = db.Column(db.String(20))
     vote = db.relationship('Votes',backref='pitches',lazy='dynamic')
