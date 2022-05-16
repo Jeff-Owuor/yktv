@@ -60,7 +60,7 @@ def update_pic(uname):
     return redirect(url_for('main.profile',uname=uname))
 
 
-@main.route('/post')
+@main.route('/post',methods = ['POST','GET'])
 def new_post():
     '''
       function for displaying the blog post

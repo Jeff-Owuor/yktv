@@ -1,11 +1,21 @@
 {% extends 'base.html'%}
+{% import 'macros.html' as macro%}
 
+{% block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index2.css')}}">
+{% endblock %}
 
 
 {% block content %}
-<div>
+<h1 style="text-align:center;font-family:'Courier New', Courier, monospace">Day In The Life ...</h1>
+
+<div style="text-align:center;">
+<h2>Some wise words for you to digest:</h2>
 <p style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:20px;font-style: italic;font-weight: 200;">{{all_quotes.quote}}</p>
 <h3 style="font-family: 'Courier New', Courier, monospace">~  {{all_quotes.author}}</h3>
 </div>
+
+<p>{{macro.displayBlogs(blogs)}}</p>
 
 {% endblock %}
