@@ -129,3 +129,8 @@ def upvote(id,vote_type):
             break
     return redirect(url_for('.add_pitch', id=id))   
     
+@main.route('/removecomment/<int:id>',methods=['DELETE'])
+def remove_comment():
+    '''
+      function to remove a comment
+    '''
