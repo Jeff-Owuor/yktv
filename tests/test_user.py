@@ -4,12 +4,10 @@ from app.models import User,db;
 class UserModelTest(unittest.TestCase):
     def setUp(self):
         self.new_user = User(username = "Oparanya", email ="oparanya@gmail.com", bio = "Freaky", profile_pic_path = "static/photos", password = '1234567')
-        db.session.add(self.new_user)
-        db.session.commit()
+        
 
     def tearDown(self):
         User.query.delete()
-        db.session.commit()
  
     def test_password_setter(self):
         self.assertTrue(self.new_user.pass_secure is not None)
