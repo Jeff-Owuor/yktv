@@ -7,6 +7,8 @@ from app.request import get_random_quote
 from .forms import BlogForm,UpdateProfile,CommentsForm
 from ..models import User,Blogs,Votes,Comment
 from flask_login import login_required, current_user
+import os
+
 
 @main.route('/')
 def index():

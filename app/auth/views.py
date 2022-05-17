@@ -4,7 +4,8 @@ from flask_login import login_user,logout_user,login_required
 from ..models import User
 from .forms import RegistrationForm,LoginForm
 from .. import db
-
+import smtplib
+import os
 
 @auth.route('/logout')
 @login_required
@@ -23,7 +24,7 @@ def login():
 
         flash('Invalid username or Password')
 
-    title = "watchlist login"
+    title = "Jeff's blog login"
     return render_template('auth/login.html',login_form = login_form,title=title)
 
 
@@ -32,7 +33,14 @@ def login():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(email = form.email.data, username = form.username.data,password = form.password.data)
+        email = form.email.data
+        user = User(email = email, username = form.username.data,password = form.password.data)
+        
+        message = "You have been subscribed to Day in the life.. application"
+        server = smtplib.SMTP("smtp.gmail.com",587)
+        server.starttls()
+        server.login("Xjeff37@gmail.com",os.environ.get('MAIL_PASSWORD'))
+        server.sendmail("Xjeff37@gmail.com",email,message)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('auth.login'))
