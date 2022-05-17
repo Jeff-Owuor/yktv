@@ -28,12 +28,13 @@
 
 {% macro displaySpecificBlog(specific_blog_list) %} 
 {% for comment in specific_blog_list %}
-<div>
+<div style="display:flex; justify-content: space-evenly;">
+    
     <p style="margin:5px; font-size:20px;font-family:Arial, Helvetica, sans-serif;">{{comment.comment}} </p>
-    <form action="{{url_for('main.delete_blog',comment_id = comment.id)}}" method="POST">
+    <p style="margin:5px;font-size:20px;">{{comment.time_posted.strftime('%Y/%m/%d') }}</p>
+    <form action="{{url_for('main.delete_comment',commentId = comment.id)}}" method="POST">
         <input  type="submit" class="btn  btn-danger" value="Delete Comment">
     </form>
-    <p style="margin:5px;font-size:20px;">{{comment.time_posted.strftime('%Y/%m/%d || %r') }}</p>
 </div>
 {% endfor %} 
 {% endmacro %}  

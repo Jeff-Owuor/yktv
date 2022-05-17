@@ -19,6 +19,7 @@ class User(UserMixin,db.Model):
     vote = db.relationship('Votes',backref='user',lazy='dynamic')
     pass_secure= db.Column(db.String(255))
     Blog = db.relationship('Blogs',backref = 'user',lazy="dynamic")
+    comment = db.relationship('Comment',backref='user',lazy="dynamic")
     
     @property
     def password(self):

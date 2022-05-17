@@ -88,20 +88,21 @@ def new_comment(id):
     
     if form.validate_on_submit():
         comments = form.comment_detail.data
-        new_comment = Comment( comment=comments, user_id = current_user.id, blog_id = blog.id )
+        user_id = current_user._get_current_object().id
+        new_comment = Comment( comment=comments, user_id = user_id, blog_id = blog.id )
         new_comment.save_comment()
         return redirect(url_for('.add_pitch', id=blog.id ))
     return render_template('comments.html',form=form)
 
-@main.route('/comments/<comment_Id>/delete', methods = ['POST'])
-def delete_comment(comment_id):
-    comment = Comment.query.get(comment_id)
+@main.route('/opinions/<commentId>/delete', methods = ['POST'])
+def delete_comment(commentId):
+    comment = Comment.query.get(commentId)
     if comment.user != current_user:
         abort(403)
     comment.delete_comment()
 
     flash("Comment Deleted")
-    return redirect(url_for('.add_pitch'))
+    return redirect(url_for('.add_pitch', id=comment.id ))
 
 
 @main.route('/blog/<blogId>/delete', methods = ['POST'])
