@@ -18,7 +18,7 @@ class BlogModelTest(unittest.TestCase):
         self.assertEquals(self.new_blog.blog,'A line of code a day keeps peace at bay')
         self.assertEquals(self.new_blog.user,self.user_oparanya)
         
-    def test_save_review(self):
+    def test_save_blog(self):
         self.new_blog.save_blog()
         self.assertTrue(len(Blogs.query.all())>0)
         

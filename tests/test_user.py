@@ -21,10 +21,10 @@ class UserModelTest(unittest.TestCase):
 
     def test_check_instance_variables(self):
         self.assertEquals(self.new_user.username, 'Oparanya')
-        self.assertEquals(self.new_user.email, 'Oparanya@gmail.com')
-        self.assertEquals(self.new_user.bio, 'freaky')
+        self.assertEquals(self.new_user.email, 'oparanya@gmail.com')
+        self.assertEquals(self.new_user.bio, 'Freaky')
         self.assertEquals(self.new_user.profile_pic_path, 'static/photos')
-        self.assertTrue(self.new_user.verify_password('12345'))
+        self.assertTrue(self.new_user.verify_password('1234567'))
 
 
     def test_no_access_password(self):
