@@ -96,15 +96,6 @@ def new_comment(id):
         return redirect(url_for('.add_pitch', id=blog.id ))
     return render_template('comments.html',form=form)
 
-@main.route('/opinions/<commentId>/delete', methods = ['POST'])
-def delete_comment(commentId):
-    comment = Comment.query.get(commentId)
-    if comment.user != current_user:
-        abort(403)
-    comment.delete_comment()
-
-    flash("Comment Deleted")
-    return redirect(url_for('.add_pitch', id=comment.id ))
 
 
 @main.route('/blog/<blogId>/delete', methods = ['POST'])
