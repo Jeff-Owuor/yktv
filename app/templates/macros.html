@@ -5,6 +5,9 @@
           <h5>Title:  {{blog.title}}</h5>
           <h6>Bloger:  {{blog.user.username}}</h6>
           <p>{{blog.blog}}  ~blog</p>
+          <form action="{{url_for('main.delete_blog',blogId = blog.id)}}" method="POST">
+            <input  type="submit" class="btn  btn-danger" value="Delete Post">
+        </form>
           <p>Posted On:{{blog.posted.strftime('%Y/%m/%d %r')}}</p>
           <a href=" {{url_for('.new_comment',id=blog.id)}}" style="color:white">LEAVE A COMMENT</a>
 
@@ -27,6 +30,9 @@
 {% for comment in specific_blog_list %}
 <div>
     <p style="margin:5px; font-size:20px;font-family:Arial, Helvetica, sans-serif;">{{comment.comment}} </p>
+    <form action="{{url_for('main.delete_blog',blogId = comment.id)}}" method="POST">
+        <input  type="submit" class="btn  btn-danger" value="Delete Comment">
+    </form>
     <p style="margin:5px;font-size:20px;">{{comment.time_posted.strftime('%Y/%m/%d || %r') }}</p>
 </div>
 {% endfor %} 

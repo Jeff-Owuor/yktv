@@ -1,5 +1,6 @@
+
 from operator import ge
-from flask import render_template,request,redirect,url_for,abort
+from flask import render_template,request,redirect,url_for,abort,flash
 from . import main
 from .. import db,photos
 from app.request import get_random_quote
@@ -92,6 +93,17 @@ def new_comment(id):
         return redirect(url_for('.add_pitch', id=blog.id ))
     return render_template('comments.html',form=form)
 
+@main.route('/blog/<blogId>/delete', methods = ['POST'])
+def delete_blog(blogId):
+    blog = Blogs.query.get(blogId)
+    if blog.user != current_user:
+        abort(403)
+    blog.delete_blog()
+
+    flash("Blog Deleted")
+    return redirect(url_for('.index'))
+
+
 @main.route('/a_pitch/<int:id>', methods=['GET', 'POST'])
 @login_required
 def add_pitch(id):
@@ -129,8 +141,3 @@ def upvote(id,vote_type):
             break
     return redirect(url_for('.add_pitch', id=id))   
     
-@main.route('/removecomment/<int:id>',methods=['DELETE'])
-def remove_comment():
-    '''
-      function to remove a comment
-    '''
